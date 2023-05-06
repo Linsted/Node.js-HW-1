@@ -32,7 +32,7 @@ const removeContact = async (contactId) => {
 };
 
 const addContact = async (name, email, phone) => {
-    // ...твій код
+
 
     const contacts = await listContacts();
     const newUser = {
@@ -54,4 +54,4 @@ module.exports = {
     getContactById,
     removeContact,
     addContact,
-}
+};
