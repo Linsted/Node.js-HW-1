@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const path = require('path');
+const shortid = require('shortid');
 
 
 
@@ -30,12 +31,27 @@ const removeContact = async (contactId) => {
     
 };
 
-const addContact = (name, email, phone) => {
+const addContact = async (name, email, phone) => {
     // ...твій код
 
-    
+    const contacts = await listContacts();
+    const newUser = {
+        id: shortid.generate(),
+        name,
+        email,
+        phone,
+    };
+
+    contacts.push(newUser);
+    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+    return newUser;
 };
 
 
-// getContactById("Z5sbDlS7pCzNsnAHLtDJd")
-removeContact("rsKkOQUi80sgVPCcLZZW");
+
+module.exports = {
+    listContacts,
+    getContactById,
+    removeContact,
+    addContact,
+}
